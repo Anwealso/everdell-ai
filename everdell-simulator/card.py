@@ -13,5 +13,5 @@ import utils
 
 
 class Card:
-    def __init__():
+    def __init__(self):
         pass

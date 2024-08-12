@@ -7,14 +7,12 @@ An everdell game player - handles the cards and resources held by player as
 well as accepting player input and tracking player score.
 """
 
-import random
-
 import utils
 from utils import Resource
 
 
 class Player:
-    def __init__(name=str(random.randint(1, 1000))):
+    def __init__(self, name):
         """
         Inits the everdell player class
         """
@@ -26,7 +24,7 @@ class Player:
         self.points = 0
         self.hand = []  # the players hand of cards
 
-    def getInput(strategy="random"):
+    def get_input(self, strategy="random"):
         """
         Returns the player action
         """
@@ -34,7 +32,7 @@ class Player:
         if strategy == "random":
             return random.choice(utils.Action)
 
-    def getAction(interactive="true"):
+    def get_action(self, interactive="true"):
         """
         Returns the player action
         """
@@ -42,13 +40,14 @@ class Player:
             while True:
                 # Get the players input from STDIN
                 playerInput = input(f"Enter action for player '{self.name}': ")
-                action = utils.stringToAction(playerInput)
+                action = utils.string_to_action(playerInput)
                 if action is not None:
-                    break
+                    return action
+                playerInput = input(f"Invalid input. Please enter a valid move")
         else:
             pass
 
-    def addCard(card):
+    def add_card(self, card):
         """
         Removes a card from the players hand
 
@@ -57,20 +56,20 @@ class Player:
         """
         self.hand.append(card)
 
-    def removeCard(card):
+    def remove_card(self, card):
         """
         Removes a card from the players hand
 
         Args:
             - card [Card]: the card to remove
         """
-        if card not in self.hand.remove:
+        if card not in self.hand:
             return Exception(
                 f"Card {card} could not be removed as it does not currently exist in player {self.name}'s hand"
             )
         self.hand.remove(card)
 
-    def addResource(resource, qty):
+    def add_resource(self, resource, qty):
         """
         Removes a card from the players hand
 
@@ -87,7 +86,7 @@ class Player:
         elif resource == Resource.Pebble:
             self.numPebble += qty
 
-    def removeResource(resource, qty):
+    def remove_resource(self, resource, qty):
         """
         Removes a card from the players hand
 
