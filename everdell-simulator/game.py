@@ -7,9 +7,8 @@ This is the everdell game that holds all of the game state and input actions
 and state transitions.
 """
 
-import random
-import utils
-from player import *
+from random import random
+from Player import Player
 
 
 class Game:
