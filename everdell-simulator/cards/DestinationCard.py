@@ -1,7 +1,7 @@
 from Card import Card
 from Player import Player
 from Card import CardCategory
-from ActionSpaces.ActionSpace import ActionSpace
+from ActionSpaces.ActionSpace import CardActionSpace
 from resources import ResourceValue
 
 
@@ -16,9 +16,11 @@ class DestinationCard(Card):
         name: str,
         cost: ResourceValue,
         score_value: int,
-        action_space: ActionSpace,
-        use_effect: function,
-    ):
-        super(category, name, cost, score_value, use_effect)
-        self.action_space = action_space
+        on_play: function,
+        isOpen: bool,
+        on_add_worker: function,
+    ) -> None:
+        super(category, name, cost, score_value, on_play)
+        self.isOpen: bool = isOpen
+        self.action_space = CardActionSpace(on_add_worker, isOpen)
         pass

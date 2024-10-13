@@ -33,6 +33,8 @@ class Card:
         self.name: str = name
         self.cost: ResourceValue = cost
         self.score_value: int = score_value
-        self.triggered: bool = False
-        self.triggered: function = use_effect
+        self.triggered: bool = (
+            False  # do we need this or do cards just trigger instantaneously on playing / placing critter on
+        )
+        self.use_effect: function = use_effect
         pass

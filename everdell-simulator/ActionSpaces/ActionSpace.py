@@ -9,22 +9,23 @@ class ActionSpace:
 
     def __init__(self, useEffect: function) -> None:
         self.workers: list[Worker] = []
+        self.workers: list[Worker] = []
         # The effect that is triggered when the space is visited.
         # This effect could be gaining resources, or drawing or discarding cards with various condition
         self.useEffect: function = useEffect
         pass
 
     @abstractmethod
-    def hasAvailableSlot(self, player: Player):
+    def hasAvailableSlot(self, player: Player) -> bool:
         """
         Checks whether the actionspace has an available slot for the player
         """
         pass
 
-    def getWorkers(self):
+    def getWorkers(self) -> list[Worker]:
         return self.workers
 
-    def addWorker(self, worker: Worker):
+    def addWorker(self, worker: Worker) -> None:
         """
         Adds a worker to the actionspace
         """
@@ -33,9 +34,9 @@ class ActionSpace:
         else:
             raise Exception("No slots available to add worker to.")
 
-    def removeAllWorkers(self):
+    def removeAllWorkers(self) -> None:
         """
-        Removes all the workers from the aciton space
+        Removes all the workers from the action space
         """
         self.workers.clear()
 
@@ -53,7 +54,7 @@ class BasicActionSpace(ActionSpace):
 
         super(useEffect)
 
-    def hasAvailableSlot(self, player: Player):
+    def hasAvailableSlot(self, player: Player) -> bool:
         """
         Checks whether the actionspace has an available slot
         """
@@ -66,7 +67,7 @@ class ForestActionSpace(ActionSpace):
         self.maxWorkers: int = maxWorkers
         super(useEffect)
 
-    def hasAvailableSlot(self, player: Player):
+    def hasAvailableSlot(self, player: Player) -> bool:
         """
         Checks whether the actionspace has an available slot for this specific player
         """
@@ -74,6 +75,19 @@ class ForestActionSpace(ActionSpace):
             player.name not in [worker.owner for worker in self.workers]
             and len(self.workers) < self.maxWorkers
         )
+
+
+class CardActionSpace(ActionSpace):
+
+    def __init__(self, useEffect: function, isOpen: bool) -> None:
+        self.isOpen: bool = isOpen
+        super(useEffect)
+
+    def hasAvailableSlot(self, player: Player) -> bool:
+        """
+        Checks whether the actionspace has an available slot for this specific player
+        """
+        return len(self.workers) == 0 and (self.isOpen or (self in player.playedCards))
 
 
 class Haven(ActionSpace):
