@@ -13,7 +13,6 @@ class ActionSpace:
         # The effect that is triggered when the space is visited.
         # This effect could be gaining resources, or drawing or discarding cards with various condition
         self.useEffect: function = useEffect
-        pass
 
     @abstractmethod
     def hasAvailableSlot(self, player: Player) -> bool:
@@ -79,7 +78,7 @@ class ForestActionSpace(ActionSpace):
 
 class CardActionSpace(ActionSpace):
 
-    def __init__(self, useEffect: function, isOpen: bool) -> None:
+    def __init__(self, isOpen: bool, useEffect: function) -> None:
         self.isOpen: bool = isOpen
         super(useEffect)
 
