@@ -11,39 +11,28 @@ class ResourceValue:
         pass
 
     def __add__(self, other_value: ResourceValue):
-        self.twig += other_value.twig
-        self.resin += other_value.resin
-        self.pebble += other_value.pebble
-        self.berry += other_value.berry
+        return ResourceValue(
+            self.twig + other_value.twig,
+            self.resin + other_value.resin,
+            self.pebble + other_value.pebble,
+            self.berry + other_value.berry,
+        )
 
     def __sub__(self, other_value: ResourceValue):
-        if self.twig >= other_value.twig:
-            self.twig -= other_value.twig
-        else:
-            raise Exception(
-                "Error: Subtraction would result in negative resource balance"
-            )
+        result_twig: int = self.twig - other_value.twig
+        result_resin: int = self.resin - other_value.resin
+        result_pebble: int = self.pebble - other_value.pebble
+        result_berry: int = self.berry - other_value.berry
 
-        if self.resin >= other_value.resin:
-            self.resin -= other_value.resin
-        else:
+        if result_twig < 0 or result_resin < 0 or result_pebble < 0 or result_berry < 0:
             raise Exception(
-                "Error: Subtraction would result in negative resource balance"
+                "Error: Subtraction would result in negative resource value"
             )
+        else:
+            return ResourceValue(result_twig, result_resin, result_pebble, result_berry)
 
-        if self.pebble >= other_value.pebble:
-            self.pebble -= other_value.pebble
-        else:
-            raise Exception(
-                "Error: Subtraction would result in negative resource balance"
-            )
-
-        if self.berry >= other_value.berry:
-            self.berry -= other_value.berry
-        else:
-            raise Exception(
-                "Error: Subtraction would result in negative resource balance"
-            )
+    def sum(self):
+        return self.twig + self.resin + self.pebble + self.berry
 
 
 class ResourceType(Enum):

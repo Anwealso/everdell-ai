@@ -30,7 +30,7 @@ class Player:
         self.points = 0
         self.hand = []  # the players hand of cards
 
-    def get_input(self, strategy="random"):
+    def getInput(self, strategy="random"):
         """
         Returns the player action
         """
@@ -38,7 +38,7 @@ class Player:
         if strategy == "random":
             return random.choice(utils.Action)
 
-    def get_action(self, interactive="true"):
+    def getAction(self, interactive="true"):
         """
         Returns the player action
         """
@@ -53,7 +53,7 @@ class Player:
         else:
             pass
 
-    def add_card(self, card):
+    def giveCard(self, card):
         """
         Removes a card from the players hand
 
@@ -62,7 +62,7 @@ class Player:
         """
         self.hand.append(card)
 
-    def remove_card(self, card):
+    def takeCard(self, card):
         """
         Removes a card from the players hand
 
@@ -74,3 +74,9 @@ class Player:
                 f"Card {card} could not be removed as it does not currently exist in player {self.name}'s hand"
             )
         self.hand.remove(card)
+
+    def giveResources(self, value: ResourceValue):
+        self.resources += value
+
+    def takeResources(self, value: ResourceValue):
+        self.resources -= value
