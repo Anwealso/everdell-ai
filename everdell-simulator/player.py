@@ -11,6 +11,7 @@ import utils
 from random import random
 from utils import Resource
 from resources import ResourceValue
+from Worker import Worker
 
 
 class Player:
@@ -19,7 +20,13 @@ class Player:
         Inits the everdell player class
         """
         self.name = name
-        self.resources: ResourceValue = 0
+        self.resources: ResourceValue = ResourceValue(0, 0, 0, 0)
+        self.workers: list[Worker] = [  # start with 4 workers
+            Worker(self.name),
+            Worker(self.name),
+            Worker(self.name),
+            Worker(self.name),
+        ]
         self.points = 0
         self.hand = []  # the players hand of cards
 

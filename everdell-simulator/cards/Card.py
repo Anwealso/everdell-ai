@@ -17,7 +17,7 @@ from Player import Player
 
 class CardCategory(Enum):
     CONSTRUCTION = 1
-    CREATURE = 2
+    CRITTER = 2
 
 
 class Card:
