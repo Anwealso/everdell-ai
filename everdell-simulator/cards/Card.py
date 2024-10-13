@@ -21,17 +21,18 @@ class CardCategory(Enum):
 
 
 class Card:
-    def __init__(self, category, name, cost, scoreValue):
+    def __init__(
+        self,
+        category: CardCategory,
+        name: str,
+        cost: ResourceValue,
+        score_value: int,
+        use_effect: function,
+    ):
         self.category: CardCategory = category
         self.name: str = name
         self.cost: ResourceValue = cost
-        self.scoreValue: int = scoreValue
+        self.score_value: int = score_value
         self.triggered: bool = False
-        pass
-
-    @abstractmethod
-    def use_effect(self, user: Player):
-        """
-        Executes the action of the card
-        """
+        self.triggered: function = use_effect
         pass

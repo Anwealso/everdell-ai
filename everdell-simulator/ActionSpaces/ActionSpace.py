@@ -2,7 +2,7 @@ from abc import abstractmethod
 from Worker import Worker
 from Player import Player
 from resources import ResourceValue
-from cards.Card import Card
+from Cards.Card import Card
 
 
 class ActionSpace:
