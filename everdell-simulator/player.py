@@ -9,17 +9,17 @@ well as accepting player input and tracking player score.
 
 import utils
 from random import random
-from utils import Resource
 from resources import ResourceValue
 from Worker import Worker
+from Cards.Card import Card
 
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name: str, cards: list[Card] = []):
         """
         Inits the everdell player class
         """
-        self.name = name
+        self.name: str = name
         self.resources: ResourceValue = ResourceValue(0, 0, 0, 0)
         self.workers: list[Worker] = [  # start with 4 workers
             Worker(self.name),
@@ -27,8 +27,8 @@ class Player:
             Worker(self.name),
             Worker(self.name),
         ]
-        self.points = 0
-        self.hand = []  # the players hand of cards
+        self.points: int = 0
+        self.hand: list[Card] = cards  # the players hand of cards
 
     def getInput(self, strategy="random"):
         """

@@ -9,10 +9,10 @@ In everdell playing a card can take allow you to draw resources from the pots,
 draw card(s), take cards from other players or be awarded points.
 """
 
-from abc import abstractmethod
-from enum import Enum
 from resources import ResourceValue
 from Player import Player
+from Worker import Worker
+from ActionSpaces.CardActionSpace import CardActionSpace
 
 
 class Card:
@@ -76,7 +76,7 @@ class DestinationCard(Card):
         isOpen: bool,
         on_add_worker: function,
     ) -> None:
-        super(CardCategory.CONSTRUCTION, name, cost, score_value, on_play)
+        super(name, cost, score_value, on_play)
         self.isOpen: bool = isOpen
         self.action_space = CardActionSpace(on_add_worker, isOpen)
         pass

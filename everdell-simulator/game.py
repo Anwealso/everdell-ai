@@ -9,12 +9,15 @@ and state transitions.
 
 from random import random
 from Player import Player
+from Deck import Deck
+from Cards.Card import Card, get_deck
+from ActionSpaces.ForestActionSpace import ForestActionSpace
 
 
 class Game:
     def __init__(self, num_players=2):
         """
-        Inits the everdell game class
+        Inits the everdell game
 
         Args:
             - All of the game args
@@ -22,9 +25,13 @@ class Game:
         random.seed()
         self.round_count = 0
         self.gameover = False
+        self.main_deck: Deck = Deck(get_deck())
         self.players = [
-            Player(str(random.randint(0, 999))) for player in range(num_players)
+            Player(player_id, self.main_deck.takeRandomCards(5 + player_id))
+            for player_id in range(num_players)
         ]
+        # self.forest: list[Card] = random.choice(ForestActionSpace.all_forest_cards(), 4)
+        self.meadow: list[Card] = self.main_deck.takeRandomCards(4)
 
     def run(self):
         """
