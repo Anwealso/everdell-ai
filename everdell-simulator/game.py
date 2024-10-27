@@ -59,3 +59,10 @@ class Game:
             # Get the player input
             action = player.get_action()
             print(f"Action: {action.value}")
+
+
+def play_critter_card():
+    """
+    Plays the given critter triggering required effects
+    """
+    pass
