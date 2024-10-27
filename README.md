@@ -1,6 +1,6 @@
 # Everdell AI 
 
-A project to create the best Everdell player agent.
+A project to create the best Everdell playing AI to ever be
 
 ## Overview
 
